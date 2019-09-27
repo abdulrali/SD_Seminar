@@ -23,7 +23,9 @@ table 50104 "CSD Seminar Comment Line"
             Caption = 'No.';
             TableRelation = if ("Table Name" = CONST (Seminar)) "CSD Seminar"
             else
-            if ("Table Name" = CONST ("Seminar Registration")) "CSD Seminar Reg. Header";
+            if ("Table Name" = CONST ("Seminar Registration")) "CSD Seminar Reg. Header"
+            else
+            if ("Table Name" = CONST ("Posted Seminar Registration")) "CSD Posted Seminar Reg. Header";
 
         }
         field(40; "Line No."; Integer)
