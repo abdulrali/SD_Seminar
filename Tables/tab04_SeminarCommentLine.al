@@ -1,4 +1,4 @@
-table 50104 "CSD Seminar CommentLine"
+table 50104 "CSD Seminar Comment Line"
 {
     Caption = 'Seminar Comment Line';
     LookupPageId = "CSD Seminar List";
@@ -21,7 +21,9 @@ table 50104 "CSD Seminar CommentLine"
         field(30; "No."; Code[20])
         {
             Caption = 'No.';
-            TableRelation = if ("Table Name" = CONST (Seminar)) "CSD Seminar";
+            TableRelation = if ("Table Name" = CONST (Seminar)) "CSD Seminar"
+            else
+            if ("Table Name" = CONST ("Seminar Registration")) "CSD Seminar Reg. Header";
 
         }
         field(40; "Line No."; Integer)
@@ -54,4 +56,15 @@ table 50104 "CSD Seminar CommentLine"
         }
     }
 
+    procedure SetUpNewLine()
+    var
+        SeminarCommentLine: Record "CSD Seminar Comment Line";
+    begin
+        SeminarCommentLine.SetRange("Table Name", "Table Name");
+        SeminarCommentLine.SetRange("No.", "No.");
+        SeminarCommentLine.SetRange("Document Line No.", "Document Line No.");
+        SeminarCommentLine.SetRange("Date", WorkDate);
+        if SeminarCommentLine.IsEmpty then
+            Date := WorkDate;
+    end;
 }
